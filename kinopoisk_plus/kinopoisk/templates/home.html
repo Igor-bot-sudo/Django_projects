@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main_content">
+    <main>
+    <!--  Paginator   -->
+      <table>
+        <tr>
+          <th colspan="3">
+            <h2>{{ result_title }}</h2>
+          </th>
+        </tr>
+        {% for movie in page_obj %}
+            {% if forloop.counter0|divisibleby:"3" %}
+              <tr>
+            {% endif %}
+              <td>
+                {% if movie.Poster == 'N/A' %}
+                  <img class="noposter" src="{% static "img/no_poster.jpg" %}">
+                {% else %}
+                  <a href="/about_movie/?i={{ movie.imdbID }}"><img src={{ movie.Poster }}></a>
+                {% endif %}
+              </td>
+            {% if forloop.counter|divisibleby:"3" %}
+              </tr>
+            {% endif %}
+        {% endfor %}
+      </table>
+    <!--  Paginator end   -->
+
+
+    <!--  Paginator menu   -->
+    {% if page_obj.has_other_pages %}
+      <nav class="list-pages">
+        <ul>
+            {% if page_obj.has_previous %}
+                <li class="page-num">
+                    <a href="/showpage/?page={{ page_obj.previous_page_number }}">&lt;</a>
+                </li>
+            {% endif %}
+
+            {% for p in page_obj.paginator.page_range %}
+                {% if page_obj.number == p %}
+                    <li class="page-num page-num-selected">{{ p }}</li>
+                    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+                        <li class="page-num">
+                            <a href="/showpage/?page={{ p }}">{{ p }}</a>
+                        </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-num">
+                    <a href="/showpage/?page={{ page_obj.next_page_number }}">&gt;</a>
+                </li>
+            {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+    <!--  Paginator menu end  -->
+
+    </main>
+</div>
+{% endblock %}
