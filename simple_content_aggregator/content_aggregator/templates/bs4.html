@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="bs4-log"></div>
+    <script>
+        const bs4Socket = new WebSocket(
+            'ws://' + window.location.host + '/ws/bs4/'
+        );
+
+        bs4Socket.onmessage = function(e) {
+            const message = JSON.parse(e.data).message;
+            let s = "<table>";
+            for(let i = 0; i < message.length; i++) {
+                let obj = message[i];
+                s += "<tr><td>";
+                if(obj.img == 'N/A'){
+                    s += '<img src="/static/img/cap.jpg">';
+                }
+                else {
+                    // s += '<img src="' + obj.img + '">';
+                    s += '<a class="link" target="_blank" href="/showpage/?hr=' +
+                    obj.link + '"><img src="' + obj.img + '"></a></td>';
+                }
+                s += '</td><td>';
+                // s += '<a class="link" target="_blank" href="' +
+                //     obj.link + '"><p>' + obj.title + '</p></a></td></tr>';
+
+                s += '<a class="link" target="_blank" href="/showpage/?hr=' +
+                    obj.link + '"><p>' + obj.title + '</p></a></td></tr>';
+            }
+            s += "</table>";
+            document.querySelector('#bs4-log').innerHTML = s;
+        };
+
+        bs4Socket.onclose = function(e) {
+            console.error('Socket closed unexpectedly');
+        };
+
+
+/*
+    Закрытие соединения
+    Для закрытия соединения мы должны отправить запрос серверу, а он по истечению таймаута тоже должен отправить ответ на подтверждение закрытия. В JavaScript это делается одним методом
+
+    // Закрываем соединение
+    myWS.close();
+
+    // Ну и естественно слушаем событие onclose, чтобы выполнить какие-то действия
+    myWS.onclose = (event) => {
+        // ...
+    };
+*/
+
+
+
+    
+
+
+
+
+    </script>
+{% endblock %}

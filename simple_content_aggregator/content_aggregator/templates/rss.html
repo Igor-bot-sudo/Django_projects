@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="rss-log"></div>
+    <script>
+        const rssSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/rss/'
+        );
+
+        rssSocket.onmessage = function(e) {
+             const message = JSON.parse(e.data).message;
+            let s = "<table>";
+            for(let i = 0; i < message.length; i++) {
+                let obj = message[i];
+                s += "<tr><td>";
+                if(obj.img == 'N/A'){
+                    s += '<img src="/static/img/cap.jpg">';
+                }
+                else {
+                    s += '<img src="' + obj.img + '">';
+                }
+                s += '</td><td>';
+                s += '<a class="link" target="_blank" href="' +
+                    obj.link + '"><p>' + obj.title + '</p></a></td></tr>';
+            }
+            s += "</table>";
+            document.querySelector('#rss-log').innerHTML = s;
+        };
+
+        rssSocket.onclose = function(e) {
+            console.error('Socket closed unexpectedly');
+        };
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+  {% for m in message %}
+      <tr>
+        <td>
+          <a class="link" href="/showpage/?hr={{ m.link }}&t={{ m.title }}&type={{ type }}" target="_blank">
+            {% if m.img == 'N/A' %}
+              <img src="/static/img/cap.jpg">
+            {% else %}
+              <img src="{{ m.img }}">
+            {% endif %}
+          </a>
+        </td>
+        <td>
+          <a class="link" href="/showpage/?hr={{ m.link }}&t={{ m.title }}&type={{ type }}" target="_blank">
+            <p>{{ m.title }}</p>
+          </a>
+        </td>
+      </tr>
+  {% endfor %}
+</table>
+{% endblock %}
