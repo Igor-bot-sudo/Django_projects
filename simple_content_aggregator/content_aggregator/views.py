@@ -16,6 +16,8 @@ def index(request):
         os.remove('content_aggregator/templates/doc.pdf')
     return render(request, 'index.html')
 
+def home(request):
+    return render(request, 'home.html')
 
 def get_content(url, out_list):
     response = requests.get(url)
@@ -70,13 +72,18 @@ def show_page(request):
     ss = f'<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">\
     <meta name="viewport" content="width=device-width, initial-scale=1.0">\
     <link href="static/css/style.css" rel="stylesheet" type="text/css" />\
+    <link rel="icon" href="static/img/favicon.svg" type="image/svg+xml">\
     <title>{title}</title></head><body>\
     <div style="text-align: right; margin-right: 50px;">\
     <a href="/pdf/">Export to PDF</a></div><br><br>{str(quote)}</body></html>'
-
     with open('content_aggregator/templates/show_page.html', 'w', encoding="utf-8") as fp:
         fp.write(ss)
+
     return render(request, 'show_page.html')
+
+    # return render(request, 'show_page.html', context={'title': title, 'body': str(quote),
+    #               'export': '<div style="text-align: right; margin-right: 50px;">\
+    #                         <a href="/pdf/">Export to PDF</a></div><br><br>'})
 
 
 def bs4_view(request):

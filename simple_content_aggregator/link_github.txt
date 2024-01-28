@@ -1,0 +1,1 @@
+https://github.com/Igor-bot-sudo/Django_projects/tree/main/simple_content_aggregator
