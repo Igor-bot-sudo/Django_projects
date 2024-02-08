@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!--style-->
+      <style>
+  /*.card {*/
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),*/
+  /*             0 6px 20px 0 rgba(0,0,0,0.39);*/
+  /* background: lightpink;*/
+  /* margin-bottom: 5%;*/
+  /* border-radius: 25px;*/
+  /* padding: 2%;*/
+  /* overflow: auto;*/
+  /* resize: both;*/
+  /* text-overflow: ellipsis;*/
+  /*}*/
+  /*.card:hover{*/
+  /*  background: lightblue;*/
+  /*}*/
+
+  /*.submit_form{*/
+  /*  text-align: center;*/
+  /*  padding: 3%;*/
+  /*  background: pink;*/
+  /*  border-radius: 25px;*/
+  /*  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),*/
+  /*              0 6px 20px 0 rgba(0,0,0,0.36);*/
+  /*}*/
+  </style>
+</head>
+<body  class="container-fluid">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-info">
+    <strong>{{message}}</strong>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+
+  <div class="row">
+      <h1><b>СПИСОК ДЕЛ</b></h1>
+    <hr>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      {% for i in list %}
+      <div class="card">
+        <b>{{ i.title }}</b>
+        <hr>
+        {{ i.date }}
+        <hr>
+        {{ i.details }}
+        <br>
+        <br>
+        <form action="/del/{{ i.id }}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
+          {% csrf_token %}
+          <button value="Удалить" type="submit"  class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span>   Удалить</button>
+        </form>
+      </div>
+      {% endfor%}
+    </div>
+    <div class="col-md-1"> </div>
+    <div class="col-md-3" >
+      <div  class="submit_form">
+      <form  method="POST">
+        {% csrf_token %}
+        {{forms}}
+
+        <input type="submit" class="btn btn-default" value="Сохранить" />
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
