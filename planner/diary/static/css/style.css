@@ -1,3 +1,9 @@
+body{
+    background: fixed;
+    background-image: url(../img/fon.png);
+    background-size: 100%;
+}
+
 h1{
     text-align: center;
 }
@@ -10,7 +16,7 @@ h1{
    border-radius: 25px;
    padding: 2%;
    overflow: auto;
-   resize: both;
+   resize: none;
    text-overflow: ellipsis;
 }
 
@@ -25,4 +31,20 @@ h1{
     border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),
                 0 6px 20px 0 rgba(0,0,0,0.36);
+}
+
+textarea {
+  width: 95%;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  resize: none;
+}
+
+.menu-bar{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 18pt;
+    font-weight: bold;
 }
