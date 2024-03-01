@@ -16,8 +16,10 @@ def index(request):
         os.remove('content_aggregator/templates/doc.pdf')
     return render(request, 'index.html')
 
+
 def home(request):
     return render(request, 'home.html')
+
 
 def get_content(url, out_list):
     response = requests.get(url)
@@ -80,10 +82,6 @@ def show_page(request):
         fp.write(ss)
 
     return render(request, 'show_page.html')
-
-    # return render(request, 'show_page.html', context={'title': title, 'body': str(quote),
-    #               'export': '<div style="text-align: right; margin-right: 50px;">\
-    #                         <a href="/pdf/">Export to PDF</a></div><br><br>'})
 
 
 def bs4_view(request):
