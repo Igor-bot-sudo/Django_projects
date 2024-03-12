@@ -1,12 +1,13 @@
 body{
+    min-width: 360px;
     background: fixed;
     background-image: url(../img/fon.png);
     background-size: 100%;
 }
 
-h1{
-    text-align: center;
-}
+/*h1{*/
+/*    text-align: center;*/
+/*}*/
 
 .card {
    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),
@@ -47,4 +48,16 @@ textarea {
     margin-bottom: 50px;
     font-size: 18pt;
     font-weight: bold;
+}
+
+.title{
+    font-size: clamp(1em, 5vw, 2em);
+    font-weight: bold;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.exit{
+    font-size: clamp(14px, 2vw, 16pt);
 }

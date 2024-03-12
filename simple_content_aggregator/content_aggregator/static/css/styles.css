@@ -4,8 +4,8 @@
 }
 
 body{
+    min-width: 360px;
     font-family: Arial;
-    font-size: 14pt;
     background: #f9f9f9 url(../img/background.jpg) fixed;
 }
 
@@ -25,27 +25,12 @@ td{
 
 .link{
     display: inline-block;
-    font-size: 16pt;
+    font-size: clamp(8.5pt, 2vw, 16pt);
     color: #0059b2;
     font-weight: bold;
     text-decoration: none;
     width: 100%;
     height: 100%;
-}
-
-img{
-    width: 200px;
-}
-
-h1{
-    color: brown;
-    text-align: center;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-h2{
-    font-size: 36pt;
 }
 
 a p{
@@ -61,7 +46,7 @@ ul {
     padding-left: 0;
     display: flex;
     justify-content: space-between;
-    font-size: 14pt;
+    font-size: clamp(0.7em, 4.0vw, 1.4em);
 }
 
 li {
@@ -82,5 +67,17 @@ li {
 .main_img{
     width: 100%;
     height: auto;
+}
 
+img{
+    width: clamp(130px, 20vw, 200px);
+}
+
+.title{
+    font-size: clamp(1em, 5vw, 2em);
+    font-weight: bold;
+    color: brown;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
 }
