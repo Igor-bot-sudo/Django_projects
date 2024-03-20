@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="back">
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+        <a href="{% url 'make' %}">Главная</a>
+        <a href="{% url 'login' %}">Выйти</a>
+    </div>
+    <h1>Создание укороченной ссылки</h1>
+        <form  method="POST" action="{% url 'make' %}">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn" value="Сформировать" />
+        </form>
+        {% if qr_code %}
+            <img src="{% static 'shortener/img/' %}{{qr_code}}" />
+        {% endif %}
+</div>
+{% endblock %}
