@@ -13,7 +13,7 @@
             <input type="submit" class="btn" value="Сформировать" />
         </form>
         {% if qr_code %}
-            <img src="{% static 'shortener/img/' %}{{qr_code}}" />
+            <img src="{% static 'shortener/media/' %}{{qr_code}}" />
         {% endif %}
 </div>
 {% endblock %}

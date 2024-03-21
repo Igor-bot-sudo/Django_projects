@@ -2,6 +2,7 @@ import random
 import qrcode
 from string import ascii_letters, digits
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 from django import forms
@@ -35,7 +36,7 @@ class MakeShortURL(FormView):
         host = request.get_host()
         long_link = request.POST['long_link']
         img_name = f"{str(timezone.now())[:-6].replace('.', '_').replace(':', '_').replace(' ', '_').replace('-', '_')}.jpg"
-        filename = f'shortener/static/shortener/img/{img_name}'
+        filename = f'shortener/static/shortener/media/{img_name}'
         img = qrcode.make(long_link)
         img.save(filename)
         short_link = ''.join([random.choice(f'{ascii_letters}{digits}{punctuation}') for _ in range(8)])
@@ -55,5 +56,8 @@ class MakeShortURL(FormView):
 
 
 def short_url(request, url):
-    o = ShortenerURLModel.objects.get(short_link=url)
-    return redirect(o.long_link)
+    try:
+        o = ShortenerURLModel.objects.get(short_link=url)
+        return redirect(o.long_link)
+    except:
+        return HttpResponse('<h1>Такой страницы не существует</h1>')
