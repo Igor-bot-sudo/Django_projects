@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content">
+    <h1>Будильник</h1>
+    <div id="headertime"></div>
+    <hr>
+    <p>Установка будильника</p>
+    <form>
+        {% csrf_token %}
+        <p><label for="hint">Заголовок: </label>
+        <input type="text" id = "hint" name="hint" /></p>
+        <p><label for="hour">Часы: </label>
+        <input type="text" id = "hour" name="hour" required /></p>
+        <p><label for="minutes">Минуты: </label>
+        <input type="text" id = "minutes" name="minutes" required /></p>
+        <input type="submit" formaction="{% url 'save' %}" formmethod="post" value="Сохранить" class="btn">
+    </form>
+    <hr>
+    <p>Список установленных будильников</p>
+    <form>
+        {% csrf_token %}
+        <select name="alarm" id="alarm">
+          <option value="">--Выберите установленный будильник--</option>
+          {% for i in alarms %}
+             <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+        <input type="submit" formaction="{% url 'delete' %}" formmethod="post" value="Удалить" class="btn">
+    </form>
+</div>
+
+<script>
+    let Elem = document.getElementById("headertime");
+
+    function PlaySound(){
+        let x = document.createElement("AUDIO");
+        x.src = "{% static 'clock/snd/audio.ogg' %}";
+        x.play();
+    }
+
+
+    function getCurrentTime() {
+        $.ajax({
+              type: "GET",
+              url: "{% url 'gettime' %}",
+              success: function (response) {
+                  Elem.innerText  = response.time;
+                  console.log(response.let_play)
+                  if (response.let_play == true) PlaySound();
+              },
+              error: function (response) {
+                  alert(response.responseJSON.errors);
+                  console.log(response.responseJSON.errors)
+              }
+          });
+    }
+    setInterval(getCurrentTime, 1000);
+</script>
+
+{% endblock %}

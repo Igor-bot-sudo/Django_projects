@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'Clock';
+    src: url('../font/Clock.ttf');
+}
+
+body {
+    font-family: "Consolas", "Menlo", "Courier", monospace;
+    background-color: #240000;
+}
+
+h1 {
+    margin: 0 auto;
+    color: #ff9090;
+}
+
+#headertime {
+    margin: 20px auto;
+    font-family: 'Clock';
+    font-size: 100pt;
+    color: #34a9d4;
+    letter-spacing: -60px;
+}
+
+.content {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+label {
+    color: #ff9090;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+input {
+    width: 200px;
+}
+
+.btn {
+    width: 150px;
+    background-color: #34a9d4;
+    color: white;
+    font-weight: bold;
+    font-size: 12pt;
+    margin: 0 10px;
+    border-radius: 20px;
+}
+
+hr {
+    border: #ff9090 solid 1px;
+}
+
+p {
+    color: #ff9090;
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+a {
+    color: #5d5dff;
+    font-size: 16pt;
+    font-weight: bold;
+}

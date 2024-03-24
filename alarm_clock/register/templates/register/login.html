@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-info">
+                <strong>{{ message }}</strong>
+          </div>
+      {% endfor %}
+  {% endif %}
+
+
+
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+        <div>
+        <h1>Вход на сайт</h1>
+        <form method="post" action="{% url 'check_user' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for f in form %}
+                <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: &nbsp</label> {{ f|default_if_none:"" }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+            <p><button type="submit" class="btn">Войти</button></p>
+        </form>
+          <p><a href="{% url 'register' %}">Зарегистрироваться</a></p>
+          <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+        </div>
+    </div>
+{% endblock %}

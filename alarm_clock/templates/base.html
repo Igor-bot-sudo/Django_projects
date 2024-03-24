@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Будильник</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'clock/css/style.css' %}" rel="stylesheet" type="text/css" />
+	<link rel="icon" href='{% static "clock/img/favicon.svg" %}' type="image/svg+xml">
+    <script src="{% static 'clock/js/jquery-3.7.1.min.js' %}" type="text/javascript"></script>
+</head>
+<body>
+	{% block content %}
+	{% endblock %}
+</body>
+</html>
